@@ -11,7 +11,7 @@ export default function DrinkCard(props) {
                 </View>
                 <Text style={styles.drinkPrice}>${props.drink.price}.00</Text>
             </View>
-            <PrimaryButton onPressBtn={() => props.onAddToCart(drink)}>Add to Cart</PrimaryButton>
+            <PrimaryButton onPressBtn={() => props.onAddToCart(props.drink)}>Add to Cart</PrimaryButton>
         </View>
     )
 }
