@@ -11,7 +11,14 @@ export default function DrinkCard(props) {
                 </View>
                 <Text style={styles.drinkPrice}>${props.drink.price}.00</Text>
             </View>
-            <PrimaryButton onPressBtn={() => props.onAddToCart(props.drink)}>Add to Cart</PrimaryButton>
+            {
+                props.routeName === "Home"
+                ?
+                <PrimaryButton onPressBtn={() => props.onAddToCart(props.drink)}>Add to Cart</PrimaryButton>
+                :
+                <PrimaryButton onPressBtn={() => props.onRemoveFromCart(props.drink)}>Remove from Cart</PrimaryButton>
+            }
+            
         </View>
     )
 }

@@ -11,7 +11,7 @@ function CartScreen({ route, navigation }) {
             <PrimaryButton onPressBtn={ () => navigation.navigate("Home") }>Continue Shopping</PrimaryButton>
             <ScrollView>
             {
-                route.params.cartDrinks.map( (addedDrink) => <DrinkCard key={addedDrink.id} drink={addedDrink} onRemoveFromCart={route.params.removeFromCartHandler} />)
+                route.params.cartDrinks.map( (addedDrink) => <DrinkCard key={addedDrink.id} drink={addedDrink} routeName={route.name} onRemoveFromCart={route.params.onRemoveFromCart} />)
             }
             </ScrollView>
         </View>

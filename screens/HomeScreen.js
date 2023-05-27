@@ -5,7 +5,7 @@ import DrinkCard from '../components/DrinkCard';
 import Title from '../components/Title';
 import drinks from '../data/drinks.json';
 
-function HomeScreen({ navigation }) {
+function HomeScreen({ route, navigation }) {
     const [cart, setCart] = useState([]);
     const [drinksData, setDrinksData] = useState(drinks.data);
   
@@ -14,9 +14,10 @@ function HomeScreen({ navigation }) {
     }
 
     function removeFromCartHandler(drinkItem) {
-        // TODO
-        console.log(drinkItem);
-      }
+        setCart((prevCartState) => {
+            return prevCartState.filter((item) => item !== drinkItem)
+        })
+    }
 
     return (
         <View style={styles.rootContainer}>
@@ -34,7 +35,7 @@ function HomeScreen({ navigation }) {
             <ScrollView>
             {
                 drinksData &&
-                drinksData.map( (drinkInfo) => <DrinkCard key={drinkInfo.id} drink={drinkInfo} onAddToCart={addToCartHandler} />)
+                drinksData.map( (drinkInfo) => <DrinkCard key={drinkInfo.id} drink={drinkInfo} routeName={route.name} onAddToCart={addToCartHandler} />)
             }
             </ScrollView>
 
