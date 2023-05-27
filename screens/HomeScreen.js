@@ -24,7 +24,7 @@ function HomeScreen({ route, navigation }) {
 				return updatedCart
 			}
 			else {
-				[...prevCartState, {...drinkItem, quantity: 1}]
+				return [...prevCartState, {...drinkItem, quantity: 1}]
 			}
 		});
 	}

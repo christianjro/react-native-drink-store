@@ -13,10 +13,16 @@ export default function DrinkCard(props) {
             </View>
             {
                 props.routeName === "Home"
-                ?
+                &&
                 <PrimaryButton onPressBtn={() => props.onAddToCart(props.drink)}>Add to Cart</PrimaryButton>
-                :
-                <PrimaryButton onPressBtn={() => props.onRemoveFromCart(props.drink)}>Remove from Cart</PrimaryButton>
+            }
+            {   
+                props.routeName === "Cart"
+                &&
+                <View>
+                    <Text style={styles.drinkQuantity}>Quantity: {props.drink.quantity}</Text>
+                    <PrimaryButton onPressBtn={() => props.onRemoveFromCart(props.drink)}>Remove from Cart</PrimaryButton>
+                </View>
             }
             
         </View>
@@ -52,6 +58,8 @@ const styles = StyleSheet.create({
     },
     drinkPrice: {
         fontSize: 20
-
+    },
+    drinkQuantity: {
+        textAlign: 'center'
     }
 });
