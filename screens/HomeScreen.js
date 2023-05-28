@@ -14,7 +14,7 @@ function HomeScreen({ route, navigation }) {
 			const isItemInCart = prevCartState.some(item => item.id === drinkItem.id)
 			if (isItemInCart) {
 				const updatedCart = prevCartState.map(item => {
-					if (item.id === drinkItem.id ) {
+					if (item.id === drinkItem.id) {
 						return { ...item, quantity: item.quantity + 1 }
 					}
 					else {
@@ -31,7 +31,23 @@ function HomeScreen({ route, navigation }) {
 
 	function removeFromCartHandler(drinkItem) {
 		setCart((prevCartState) => {
-			return prevCartState.filter((item) => item !== drinkItem)
+			const isItemInCart = prevCartState.some(item => item.id === drinkItem.id)
+			if (isItemInCart) {
+				const updatedCart = prevCartState.map(item => {
+					if (item.id === drinkItem.id && item.quantity >= 1) {
+						return {...item, quantity: item.quantity - 1}
+					}
+					else {
+						return item
+					}
+				})
+				// to remove items that are less than 0
+				const filteredCart = updatedCart.filter(item => item.id !== drinkItem.id || item.quantity > 0) 
+				return filteredCart
+			} 
+			else {
+				return prevCartState.filter((item) => item !== drinkItem)
+			}
 		})
 	}
 
