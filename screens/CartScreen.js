@@ -5,15 +5,20 @@ import Title from '../components/Title';
 import PrimaryButton from '../components/PrimaryButton';
 
 function CartScreen({ route, navigation }) {
+    const [cartItems, setCartItems] = useState([])
 
-    const cartItems = route.params.cartDrinks.map( (addedDrink) => (
-        <DrinkCard 
-            key={addedDrink.id} 
-            drink={addedDrink} 
-            routeName={route.name} 
-            onRemoveFromCart={route.params.onRemoveFromCart} 
-        />
-    ))
+    useEffect(() => {
+        const updatedCartItems = route.params.cartDrinks.map( (addedDrink) => (
+            <DrinkCard 
+                key={addedDrink.id} 
+                drink={addedDrink} 
+                routeName={route.name} 
+                onRemoveFromCart={route.params.onRemoveFromCart} 
+            />
+        ))
+        setCartItems(updatedCartItems)
+    }, [route.params.cartDrinks, route.params.onRemoveFromCart])
+    
 
     return (
         <View style={styles.rootContainer}>
