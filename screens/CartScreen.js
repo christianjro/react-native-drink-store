@@ -24,7 +24,7 @@ function CartScreen({ route, navigation }) {
         <View style={styles.rootContainer}>
             <Title>Your Cart</Title>
             <PrimaryButton onPressBtn={ () => navigation.navigate("Home") }>Continue Shopping</PrimaryButton>
-            <ScrollView>
+            <ScrollView testID="cartContainer">
                 {cartItems}
             </ScrollView>
         </View>

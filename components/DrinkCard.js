@@ -3,7 +3,7 @@ import PrimaryButton from './PrimaryButton';
 
 export default function DrinkCard(props) {
     return (
-        <View style={styles.drinkContainer}>
+        <View style={styles.drinkContainer} testID={props.drink.name}>
             <View style={styles.drinkInner}>
                 <Text style={styles.drinkName}>{props.drink.name}</Text>
                 <View style={styles.drinkImg}>
