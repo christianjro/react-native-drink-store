@@ -20,7 +20,7 @@ export default function DrinkCard(props) {
                 props.routeName === "Cart"
                 &&
                 <View>
-                    <Text style={styles.drinkQuantity}>Quantity: {props.drink.quantity}</Text>
+                    <Text testID="quantity" style={styles.drinkQuantity}>Quantity: {props.drink.quantity}</Text>
                     <PrimaryButton onPressBtn={() => props.onRemoveFromCart(props.drink)}>Remove from Cart</PrimaryButton>
                 </View>
             }
