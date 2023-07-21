@@ -1,24 +1,25 @@
 import { View, TextInput, StyleSheet, ScrollView } from 'react-native';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import DrinkCard from '../components/DrinkCard';
 import Title from '../components/Title';
 import PrimaryButton from '../components/PrimaryButton';
+import { AppContext } from '../AppContext';
 
 function CartScreen({ route, navigation }) {
-    const [cartItems, setCartItems] = useState([])
+    const { cart, removeFromCart } = useContext(AppContext)
 
-    useEffect(() => {
-        const updatedCartItems = route.params.cartDrinks.map( (addedDrink) => (
-            <DrinkCard 
-                key={addedDrink.id} 
-                drink={addedDrink} 
-                routeName={route.name} 
-                onRemoveFromCart={route.params.onRemoveFromCart} 
-            />
-        ))
-        setCartItems(updatedCartItems)
-    }, [route.params.cartDrinks, route.params.onRemoveFromCart])
+    function removeFromCartHandler(drinkItem) {
+        removeFromCart(drinkItem)
+    }
     
+    const cartItems = cart.map((addedDrink) => (
+        <DrinkCard 
+            key={addedDrink.id} 
+            drink={addedDrink} 
+            routeName={route.name} 
+            onRemoveFromCart={removeFromCartHandler} 
+        />
+    ))
 
     return (
         <View style={styles.rootContainer}>
