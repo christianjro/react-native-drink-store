@@ -1,5 +1,5 @@
-import { View, TextInput, StyleSheet, ScrollView } from 'react-native';
-import { useState, useEffect, useContext } from 'react';
+import { View, StyleSheet, ScrollView } from 'react-native';
+import { useContext } from 'react';
 import DrinkCard from '../components/DrinkCard';
 import Title from '../components/Title';
 import PrimaryButton from '../components/PrimaryButton';
@@ -24,7 +24,10 @@ function CartScreen({ route, navigation }) {
     return (
         <View style={styles.rootContainer}>
             <Title>Your Cart</Title>
-            <PrimaryButton onPressBtn={ () => navigation.navigate("Home") }>Continue Shopping</PrimaryButton>
+            <PrimaryButton onPressBtn={ () => navigation.navigate("Home") }>
+                Continue Shopping
+            </PrimaryButton>
+            
             <ScrollView testID="cartContainer">
                 {cartItems}
             </ScrollView>

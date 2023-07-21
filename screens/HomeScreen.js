@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { View, TextInput, StyleSheet, Alert, Text, Button, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import PrimaryButton from '../components/PrimaryButton';
 import DrinkCard from '../components/DrinkCard';
 import Title from '../components/Title';
@@ -14,19 +14,24 @@ function HomeScreen({ route, navigation }) {
 		addToCart(drinkItem)
 	}
 
+	const drinkItems = drinksData.map((drinkInfo) => 
+		<DrinkCard 
+			key={drinkInfo.id} 
+			drink={drinkInfo} 
+			routeName={route.name} 
+			onAddToCart={addToCartHandler} 
+		/>
+	)
+
 	return (
 		<View style={styles.rootContainer}>
 			<Title>Drinks Cafe Menu</Title>
-			<PrimaryButton 
-				onPressBtn={() => navigation.navigate('Cart')}>
+			<PrimaryButton onPressBtn={() => navigation.navigate('Cart')}>
 				View your shopping cart
 			</PrimaryButton>
-
+			
 			<ScrollView>
-			{
-				drinksData &&
-				drinksData.map( (drinkInfo) => <DrinkCard key={drinkInfo.id} drink={drinkInfo} routeName={route.name} onAddToCart={addToCartHandler} />)
-			}
+				{drinkItems}
 			</ScrollView>
 
 		</View>

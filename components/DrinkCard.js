@@ -1,4 +1,4 @@
-import { View, Button, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet } from 'react-native';
 import PrimaryButton from './PrimaryButton';
 
 export default function DrinkCard(props) {
