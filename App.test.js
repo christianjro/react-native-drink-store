@@ -131,4 +131,32 @@ describe('<App />', () => {
     expect(drinkQuantityText).toBe('Quantity: 1')
   })
 
+  it('drink is removed from cart when quantity is equal to 0', () => { 
+    const { getByTestId, getByText, queryByTestId } = render(<App />)
+
+    // add two drinks to the cart
+    const drinkName = 'Handcrafted Rubber Towels Smoothie'
+    const drinkCard = getByTestId(drinkName)
+    const addToCartButton = within(drinkCard).getByText('Add to Cart')
+
+    fireEvent.press(addToCartButton)
+    fireEvent.press(addToCartButton)
+
+    // navigate to the cart
+    const cartLink = getByText('View your shopping cart')
+    fireEvent.press(cartLink)
+
+    // remove drinks
+    const cartContainer = getByTestId('cartContainer')
+    const drinkContainer = within(cartContainer).getByTestId(drinkName)
+    const removeFromCartButton = within(drinkContainer).getByText('Remove from Cart')
+
+    fireEvent.press(removeFromCartButton)
+    fireEvent.press(removeFromCartButton)
+
+    // check that the drink is no longer in the cart
+    const removedDrink = queryByTestId(drinkName)
+
+    expect(removedDrink).toBeNull()
+  })
 });
