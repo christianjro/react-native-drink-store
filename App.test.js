@@ -95,11 +95,40 @@ describe('<App />', () => {
     expect(drinkQuantityTextA).toBe('Quantity: 2')
 
     // check second drink
-
     const drinkContainerB = within(cartContainer).getByTestId(drinkNameB)
     const drinkQuantityB = within(drinkContainerB).getByTestId('quantity')
     const drinkQuantityTextB = drinkQuantityB.props.children.join('')
 
     expect(drinkQuantityTextB).toBe('Quantity: 1')
   })
+
+  it('removing a drink from the cart updates the quanity', () => {
+    const { getByTestId, getByText, queryByTestId } = render(<App />)
+
+    // add two drinks to the cart
+    const drinkName = 'Handcrafted Rubber Towels Smoothie'
+    const drinkCard = getByTestId(drinkName)
+    const addToCartButton = within(drinkCard).getByText('Add to Cart')
+
+    fireEvent.press(addToCartButton)
+    fireEvent.press(addToCartButton)
+
+    // navigate to the cart
+    const cartLink = getByText('View your shopping cart')
+    fireEvent.press(cartLink)
+
+    // remove one drink
+    const cartContainer = getByTestId('cartContainer')
+    const drinkContainer = within(cartContainer).getByTestId(drinkName)
+    const removeFromCartButton = within(drinkContainer).getByText('Remove from Cart')
+
+    fireEvent.press(removeFromCartButton)
+
+    // check the quantity
+    const drinkQuantity = within(drinkContainer).getByTestId('quantity')
+    const drinkQuantityText = drinkQuantity.props.children.join('')
+
+    expect(drinkQuantityText).toBe('Quantity: 1')
+  })
+
 });
